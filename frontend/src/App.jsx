@@ -18,7 +18,6 @@ const App = () => {
         </Routes>
       </div>
 
-      {/* ToastContainer should be placed once at root level */}
       <ToastContainer position="top-right" autoClose={3000} />
     </div>
   )

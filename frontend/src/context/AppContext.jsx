@@ -22,11 +22,11 @@ export const AppContextProvider=({children})=>{
     }
 
     useEffect(()=>{
-        setProducts()
+        fetchProducts()
     },[])
     
 
-    const addToCart=()=>{
+    const addToCart=(itemId)=>{
         let cartData=structuredClone(cartItem);
 
         if(cartData[itemId]){
@@ -38,13 +38,32 @@ export const AppContextProvider=({children})=>{
         setCartItem(cartData);
         toast.success("Added to Cart")
     }
+    const updateCart=(itemId,quantity)=>{
+        let cartData=structuredClone(cartItem)
+        cartData[itemId]=quantity;
+        setCartItem(cartData)
+        toast.success("Cart Updated")
+    }
+    const deleteCart=(itemId)=>{
+        let cartData=structuredClone(cartItem);
+        if(cartData){
+            cartData[itemId] -=1;
+            if(cartData[cartItem]===0){
+                delete cartData[cartItem]
+            }
+        }
+        toast.success("Removed from cart")
+        setCartItem(cartData)
+    }
 
     const value={ 
         navigate,
         user,setUser,
         setIsSeller,isSeller,showUserLogin,setShowUserLogin,
         setProducts,products,
-        curreny
+        curreny,addToCart,
+        updateCart,deleteCart,
+        cartItem
     }
 
  
