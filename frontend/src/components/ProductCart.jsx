@@ -5,7 +5,7 @@ import { useAppContext } from "../context/AppContext";
 const ProductCart = ({products}) => {
     const [count, setCount] = React.useState(0);
     const {currency}=useAppContext()
-
+    console.log(products); 
    
     return (
         <div className="border border-gray-500/20 rounded-md md:px-4 px-3 py-2 bg-white min-w-56 max-w-56 w-full">
@@ -32,7 +32,7 @@ const ProductCart = ({products}) => {
                     </p>
                     <div className="text-indigo-500"
                     >
-                        
+
                         {count === 0 ? (
                             <button className="flex items-center justify-center gap-1 bg-indigo-100 border border-indigo-300 md:w-[80px] w-[64px] h-[34px] rounded text-indigo-600 font-medium" onClick={() => setCount(1)} >
                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
