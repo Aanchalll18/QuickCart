@@ -3,12 +3,18 @@ import { useAppContext } from "../context/AppContext";
 import { Link, useParams } from "react-router-dom";
 import { assets } from "../assets/assets";
 
-const {products,navigate,currency,addToCart}=useAppContext()
-const {id}=useParams()
+// const {products,navigate,currency,addToCart}=useAppContext()
+
+// const {id}=useParams()
 
 const ProductDetails = () => {
+
+	const {products,navigate,currency,addToCart}=useAppContext()
+	
+const {id}=useParams()
+
 	const [thumbnail, setThumbnail] = React.useState(null);
-    const [relatedProducts,setRelatedProducts]=useState(product.images[0])
+    const [relatedProducts,setRelatedProducts]=useState([])
     const product=products.find((item)=>item._id === id);
 
     useEffect(()=>{
