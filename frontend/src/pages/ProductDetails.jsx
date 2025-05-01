@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAppContext } from "../context/AppContext";
 import { Link, useParams } from "react-router-dom";
 import { assets } from "../assets/assets";
+import ProductCart from "../components/ProductCart";
 
 // const {products,navigate,currency,addToCart}=useAppContext()
 
@@ -99,6 +100,19 @@ const {id}=useParams()
 							</button>
 						</div>
 					</div>
+				</div>
+				{/* button */}
+				<div className="flex flex-col items-center mt-20">
+					<div className="flex flex-col items-center w-max">
+						<p className="text-3xl font-medium">Related Products</p>
+						<div className="w-20 h-0.5 bg-primary rounded-full mt-2">
+						</div>
+					</div>
+					{
+						relatedProducts.filter((product)=>product.inStock).map((product,index)=>(
+							<ProductCart key={index} product={product}/>
+						))
+					}
 				</div>
 			</div>
 		)
