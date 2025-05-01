@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import Footer from './components/Footer'
 
 const App = () => {
   const isSellerPath = useLocation().pathname.includes("seller")
@@ -17,6 +18,7 @@ const App = () => {
           <Route path='/' element={<Home />} />
         </Routes>
       </div>
+      {!isSellerPath && <Footer/>}
 
       <ToastContainer position="top-right" autoClose={3000} />
     </div>
