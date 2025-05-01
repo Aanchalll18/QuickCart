@@ -5,13 +5,17 @@ import Home from './pages/Home'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Footer from './components/Footer'
+import { useAppContext } from './context/AppContext'
+import Login from './components/Login'
 
 const App = () => {
   const isSellerPath = useLocation().pathname.includes("seller")
 
+  const {showUserLogin}=useAppContext()
   return (
     <div>
       {isSellerPath ? null : <Navbar />}
+      {showUserLogin ? <Login/> : null}
       
       <div className={`${isSellerPath ? "" : "px-6 md:px-16 lg:px-24 xl:px-32"}`}>
         <Routes>
