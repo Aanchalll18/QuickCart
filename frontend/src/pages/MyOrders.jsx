@@ -3,70 +3,83 @@ import { useAppContext } from "../context/AppContext";
 import { dummyOrders } from "../assets/assets";
 
 const MyOrders = () => {
-	const [myOrders, setMyOrders] = useState([]);
-	const { currency } = useAppContext();
+  const [myOrders, setMyOrders] = useState([]);
+  const { currency } = useAppContext();
 
-	const fetchMyOrders = () => {
-		setMyOrders(dummyOrders);
-	};
+  const fetchMyOrders = () => {
+    setMyOrders(dummyOrders);
+  };
 
-	useEffect(() => {
-		fetchMyOrders();
-	}, []);
+  useEffect(() => {
+    fetchMyOrders();
+  }, []);
 
-	return (
-		<div className="mt-16 pb-16 px-4">
-			<div className="flex flex-col items-start mb-8">
-				<p className="text-2xl font-medium uppercase">My Orders</p>
-				<div className="w-16 h-0.5 bg-primary rounded-full mt-1"></div>
-			</div>
+  return (
+    <div className="mt-16 pb-16 px-4">
+      <div className="flex flex-col items-start mb-10">
+        <p className="text-3xl font-semibold uppercase text-primary">My Orders</p>
+        <div className="w-20 h-1 bg-primary rounded-full mt-2"></div>
+      </div>
 
-			<div className="space-y-6">
-				{myOrders.map((order, index) => (
-					<div
-						key={order._id || index}
-						className="border border-gray-300 rounded p-4 shadow-sm py-5 max-w-4xl"
-					>
-						<p className="flex justify-between md:items-center text-gray-400 md:font-medium max-md:flex-col">
-							<span className="font-semibold">Order ID:</span> {order._id}
-							<span className="font-semibold">Payment Type:</span>{" "}
-							{order.paymentType}
-							<span className="font-semibold">Total Amount:</span> {currency}
-							{order.amount}
-						</p>
-						{order.items.map((item, index) => (
-							<div>
-								<div lassName="flex items-center mb-4 md:mb-0">
-									<div className="bg-primary/10 p-4 rounded-lg">
-										<img
-											src={item.product.image[0]}
-											alt=""
-											className="w-16 h-16"
-										/>
-									</div>
-									<div className="ml-4">
-										<h2 className="text-xl font-medium text-gray-800">
-											{item.product.name}
-										</h2>
-										<p>Category:{item.product.category}</p>
-									</div>
-								</div>
-                                
-                                    <div>
-                                        <p>Quantity:{item.quantity || "1"}</p>
-                                        <p>Status:{order.status}</p>
-                                        <p>Date:{new Date(order.createdAt).toLocalDateString()}</p>
-                                    </div>
-                                <p>
-                                  Amount:{currency}{item.product.offerPrice*itemquantity}  
-                                </p>
-							</div>
-						))}
-					</div>
-				))}
-			</div>
-		</div>
-	);
+      <div className="space-y-10">
+        {myOrders.map((order, index) => (
+          <div
+            key={order._id || index}
+            className="border border-gray-200 rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow duration-300 bg-white max-w-4xl"
+          >
+            {order.items.map((item, idx) => (
+              <div
+                key={idx}
+                className="flex flex-col md:flex-row items-start md:items-center gap-6"
+              >
+                <div className="bg-primary/10 p-4 rounded-lg">
+                  <img
+                    src={item.product.image[0]}
+                    alt={item.product.name}
+                    className="w-20 h-20 object-cover rounded"
+                  />
+                </div>
+                <div className="flex-1 space-y-1">
+                  <h2 className="text-xl font-medium text-gray-800">
+                    {item.product.name}
+                  </h2>
+                  <p className="text-gray-500">Category: {item.product.category}</p>
+                  <p className="text-gray-500">Quantity: {item.quantity || 1}</p>
+                  <p className="text-gray-500">
+                    Date: {new Date(order.createdAt).toLocaleDateString()}
+                  </p>
+                  <p className="text-gray-500">Status: {order.status}</p>
+                  <p className="text-primary font-semibold">
+                    Amount: {currency}
+                    {item.product.offerPrice * (item.quantity || 1)}
+                  </p>
+                </div>
+              </div>
+            ))}
+
+            {/* Order Info Below Items */}
+            <div className="mt-6 p-4 bg-gray-50 rounded-lg border-t border-dashed border-gray-300 space-y-2 text-sm md:text-base">
+              <p>
+                <span className="font-semibold text-gray-700">Order ID:</span>{" "}
+                <span className="bg-gray-200 text-gray-800 px-2 py-0.5 rounded font-mono">
+                  {order._id}
+                </span>
+              </p>
+              <p>
+                <span className="font-semibold text-gray-700">Payment Type:</span>{" "}
+                {order.paymentType}
+              </p>
+              <p>
+                <span className="font-semibold text-gray-700">Total Amount:</span>{" "}
+                {currency}
+                {order.amount}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default MyOrders;
