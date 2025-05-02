@@ -2,7 +2,7 @@ import React from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
-import { ToastContainer } from 'react-toastify'
+import {Toaster} from 'react-hot-toast'
 import 'react-toastify/dist/ReactToastify.css'
 import Footer from './components/Footer'
 import { useAppContext } from './context/AppContext'
@@ -30,7 +30,7 @@ const App = () => {
       </div>
       {!isSellerPath && <Footer/>}
 
-      <ToastContainer position="top-right" autoClose={3000} />
+      <Toaster position="top-center" />
     </div>
   )
 }

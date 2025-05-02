@@ -1,7 +1,7 @@
 import {  createContext, useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { dummyProducts } from "../assets/assets";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 export const AppContext=createContext();
 
@@ -24,6 +24,7 @@ export const AppContextProvider=({children})=>{
 
     useEffect(()=>{
         fetchProducts()
+        console.log(dummyProducts)
     },[])
     
 
@@ -49,12 +50,31 @@ export const AppContextProvider=({children})=>{
         let cartData=structuredClone(cartItem);
         if(cartData){
             cartData[itemId] -=1;
-            if(cartData[cartItem]===0){
-                delete cartData[cartItem]
+            if(cartData[itemId]===0){
+                delete cartData[itemId]
             }
         }
         toast.success("Removed from cart")
         setCartItem(cartData)
+    }
+
+    const getCartCount=()=>{
+        let totalcount=0;
+        for(const item in cartItem){
+            totalcount+=cartItem[item]
+        }
+        return totalcount;
+    }
+
+    const getCartAmount=()=>{
+        let totamt=0;
+        for(const items in cartItem){
+            let itemInfo=products.find((product)=>product._id === items)
+            if(cartItem[items]>0){
+                totamt+=itemInfo.offerPrice* cartItem[items]
+            }
+        }
+        return Math.floor(totamt*100)/100;
     }
 
     const value={ 
@@ -65,7 +85,8 @@ export const AppContextProvider=({children})=>{
         curreny,addToCart,
         updateCart,deleteCart,
         cartItem,
-        searchQuery,setSearchQuery
+        searchQuery,setSearchQuery,
+        getCartAmount,getCartCount
     }
 
  

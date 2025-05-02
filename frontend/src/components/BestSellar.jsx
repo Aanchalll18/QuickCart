@@ -4,6 +4,7 @@ import { useAppContext } from '../context/AppContext';
 
 const BestSellar = () => {
   const { products } = useAppContext();
+  console.log(products);
 
   return (
     <div className="mt-16">
@@ -14,7 +15,7 @@ const BestSellar = () => {
           .filter((product) => product.inStock)
           .slice(0, 5)
           .map((product, index) => (
-            <ProductCart key={product._id || index} products={product} />
+            <ProductCart key={product._id || index} product={product} />
         ))}
         </div>
       </div>
