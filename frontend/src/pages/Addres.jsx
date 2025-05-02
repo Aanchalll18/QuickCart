@@ -1,9 +1,15 @@
 import React from 'react'
 import { assets } from '../assets/assets'
 
-const inputFeild=(()=>(
-  <input type="text" name="" id="" />
-))
+const inputFeild=({type,placeholder,name,handlechange,address})=>(
+  <input className='w-full px-2 py-2.5 border border-gray-500/30 rounded outline-none text-gray-500 focus:border-primary transition'
+  type={type} 
+    placeholder={placeholder}
+    name={name}
+    value={value}
+    required
+  />
+)
 
 const Addres = () => {
 
@@ -18,7 +24,7 @@ const Addres = () => {
         <div className='flex-1 max-w-md'>
           <form onSubmit={onSubmithandler}>
                 <div>
-                  <inputFeild/>
+                  <inputFeild handlechange={handlechange}/>
                 </div>
           </form>
         </div>
