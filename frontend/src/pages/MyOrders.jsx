@@ -51,6 +51,15 @@ const MyOrders = () => {
 										<p>Category:{item.product.category}</p>
 									</div>
 								</div>
+                                
+                                    <div>
+                                        <p>Quantity:{item.quantity || "1"}</p>
+                                        <p>Status:{order.status}</p>
+                                        <p>Date:{new Date(order.createdAt).toLocalDateString()}</p>
+                                    </div>
+                                <p>
+                                  Amount:{currency}{item.product.offerPrice*itemquantity}  
+                                </p>
 							</div>
 						))}
 					</div>
