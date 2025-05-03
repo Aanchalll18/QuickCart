@@ -53,7 +53,8 @@ const AddProduct = () => {
 					<label className="text-base font-medium" htmlFor="product-name">
 						Product Name
 					</label>
-					<input
+					<input onChange={(e)=>setName(e.target.value)}
+                        value={name}
 						id="product-name"
 						type="text"
 						placeholder="Type here"
