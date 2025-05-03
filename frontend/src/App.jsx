@@ -21,7 +21,7 @@ const App = () => {
 
   const {showUserLogin,isSeller}=useAppContext()
   return (
-    <div>
+    <div className='text-default min-h-screen text-gray-700 bg-white'>
       {isSellerPath ? null : <Navbar />}
       {showUserLogin ? <Login/> : null}
       
@@ -34,7 +34,7 @@ const App = () => {
           <Route path='/cart' element={<CartPage/>}/>
           <Route path='/add-address' element={<Addres/>}/>
           <Route path='/my-orders' element={<MyOrders/>}/>
-          <Route path='/seller' element={isSeller ? null : <SellerLogin/>}/>
+          <Route path='/seller' element={isSeller ? <SellerLayout/> : <SellerLogin/>}/>
           <Route path='/seller-layout' element={<SellerLayout/>}/>
         </Routes>
         
