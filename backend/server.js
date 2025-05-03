@@ -5,11 +5,13 @@ import connectDb from './config/db.js';
 import 'dotenv/config'
 import userRouter from './routes/userRoute.js';
 import sellerRouter from './routes/adminRoute.js';
+import connectcloudinary from './config/cloudniary.js';
 
 const app=express();
 const port =process.env.PORT || 4000;
 
 await connectDb()
+await connectcloudinary()
 
 const allowedOrigins=['http://localhost/5173']
 
