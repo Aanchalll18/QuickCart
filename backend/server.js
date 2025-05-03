@@ -3,6 +3,8 @@ import express from 'express'
 import cors from 'cors'
 import connectDb from './config/db.js';
 import 'dotenv/config'
+import userRouter from './routes/userRoute.js';
+import sellerRouter from './routes/adminRoute.js';
 
 const app=express();
 const port =process.env.PORT || 4000;
@@ -18,6 +20,8 @@ app.use(cookieParser())
 app.use(cors({origin: allowedOrigins,credentials:true}))
 
 app.get('/',(req,res)=>res.send("API WORKING"));
+app.use('/api/user',userRouter)
+app.use('/api/seller',sellerRouter)
 
 app.listen(port,()=>{
     console.log(`server running at port ${port}`)
