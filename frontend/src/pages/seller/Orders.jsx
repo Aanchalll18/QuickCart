@@ -42,9 +42,9 @@ const Orders = () => {
                         <p>{order.address.phone}</p>
                     </div>
 
-                    <p className="font-medium text-base my-auto text-black/70">${order.amount}</p>
+                    <p className="font-medium text-base my-auto">${order.amount}</p>
 
-                    <div className="flex flex-col text-sm">
+                    <div className="flex flex-col text-sm md:text-base text-black/60">
                         <p>Method: {order.paymentType}</p>
                         <p>Date: {order.orderDate}</p>
                         <p>Payment: {order.isPaid ? "Paid" : "Pending"}</p>
