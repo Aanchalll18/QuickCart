@@ -20,8 +20,9 @@ const SellerLayout = () => {
         <>
             
             <div className="flex items-center justify-between px-4 md:px-8 border-b border-gray-300 py-3 bg-white">
+
                 <Link to="/">
-                    <img className="h-9" src={assets.logo} alt="Logo" />
+                    <img className="h-9 cursor-pointer w-34 md:w-38" src={assets.logo} alt="Logo"/>
                 </Link>
                 <div className="flex items-center gap-5 text-gray-500">
                     <p>Hi! Admin</p>
@@ -38,29 +39,25 @@ const SellerLayout = () => {
             <div className="flex">
                 {/* Sidebar */}
                 <div className="md:w-64 w-16 border-r h-[550px] text-base border-gray-300 pt-4 flex flex-col transition-all duration-300 bg-white">
-                    {sidebarLinks.map((item, index) => (
+                    {sidebarLinks.map((item) => (
                         <NavLink
                             to={item.path}
-                            key={index}
+                            key={item.name}
                             end={item.path === '/seller'}
                             className={({ isActive }) =>
                                 `flex items-center py-3 px-4 gap-3 ${
                                     isActive
-                                        ? "border-r-4 md:border-r-[6px] bg-indigo-500/10 border-primary text-primary"
-                                        : "hover:bg-gray-100/90 border-white text-gray-700"
+                                        ? "border-r-4 md:border-r-[6px] bg-primary-dull/10 border-primary text-primary"
+                                        : "hover:bg-gray-100/90"
                                 }`
                             }
                         >
-                            <img src={item.icon} alt={item.name} className="w-5 h-5" />
-                            <p className="md:block hidden text-center">{item.name}</p>
+                           <img src={item.icon} alt="" className='w-7 h-7'/>
+                            <p className='md:block hidden text-center'>{item.name}</p>
                         </NavLink>
                     ))}
                 </div>
-
-               
-                <div className="flex-1 p-4">
-                   <Outlet/>
-                </div>
+                <Outlet/>
             </div>
         </>
     );
