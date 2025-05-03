@@ -32,6 +32,7 @@ const AddProduct = () => {
 											updatedFiles[index] = e.target.files[0];
 											setFiles(updatedFiles);
 										}}
+                                        type="file" id={`image${index}`}hidden
 									/>
 									<img
 										className="max-w-24 cursor-pointer"
