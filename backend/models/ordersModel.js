@@ -10,7 +10,7 @@ const orderSchema=new mongoose.Schema({
         address:{type:String,required:true},
         status:{type:String,default:'OrdrPlaced'},
         paymentType:{type:String,required:true},
-        isPaid:{type:Boolean,required:true},
+        isPaid:{type:Boolean},
 
 },{timestamps:true})
 
