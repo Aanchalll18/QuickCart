@@ -61,7 +61,8 @@ export const placeOrderSTRIPE = async (req, res) => {
         const product=await Product.findById(item.product);
         productData.push({
             name:product.name,
-            price:product.offerPrice
+            price:product.offerPrice,
+            quantity:item.quantity
         })
         return (await acc) + product.offerPrice*item.quantity
       },0)
