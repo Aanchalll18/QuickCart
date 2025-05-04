@@ -17,7 +17,7 @@ export const placeOrderCOD=async(req,res)=>{
 
         amount+=Math.floor(amount*0.02)
 
-        await Order.ceate({
+        await Order.create({
             userId,
             items,
             amount,

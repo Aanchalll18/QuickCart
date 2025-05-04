@@ -16,6 +16,7 @@ const CartPage = () => {
 		getCartCount,
 		user,
 		axios,
+        setCartItem
 	} = useAppContext();
 
 	const [cartArray, setCartArray] = useState([]);
@@ -36,27 +37,10 @@ const CartPage = () => {
 		setCartArray(temp);
 	};
 
-	// const getUserAddress=async()=>{
-	//     try {
-	//         const {data}=await axios.get('/api/address/get');
-	//         if(data.success){
-	//            setAddresses(data.addresses)
-	//            if(data.addresses.length>0){
-	//             setSelectAddress(data.addresses[0])
-	//            }
-	//         }else{
-	//             toast.error(data.message)
-	//         }
-	//     } catch (error) {
-	//         console.log(error)
-	//         toast.error(error.message)
-	//     }
-	// }
-
 	const getUserAddress = async () => {
 		try {
 			const { data } = await axios.get("/api/address/get", {
-				withCredentials: true, // 👈 this sends cookies with the request
+				withCredentials: true, 
 			});
 
 			if (data.success) {
@@ -80,7 +64,7 @@ const CartPage = () => {
 			}
 
 			if (paymentOption === "COD") {
-				const { data } = await axios.post("/api/order/cod", {
+				const { data } = await axios.post("/api/orders/cod", {
 					userId: user._id,
 					items: cartArray.map((item) => ({
 						product: item._id,

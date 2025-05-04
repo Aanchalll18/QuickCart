@@ -21,7 +21,7 @@ export const addAddress=async(req,res)=>{
 export const getAdress=async(req,res)=>{
     try {
         const {userId}=req;
-        console.log(userId)
+        // console.log(userId)
 
         const addresses = await Address.find({ userId: req.userId });
 
