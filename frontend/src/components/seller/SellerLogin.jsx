@@ -4,7 +4,7 @@ import toast from 'react-hot-toast'
 
 const SellerLogin = () => {
 
-    const {navigate,setIsSeller,isSeller}=useAppContext()
+    const {navigate,setIsSeller,isSeller,axios}=useAppContext()
     const [email,setEmail]=useState("")
     const [password,setPassword]=useState("")
 

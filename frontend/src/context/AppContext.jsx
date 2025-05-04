@@ -23,11 +23,37 @@ export const AppContextProvider=({children})=>{
     const [cartItem,setCartItem]=useState({})
     const [searchQuery,setSearchQuery]=useState({})
 
+    // const fetchSeller=async()=>{
+    //     try {
+    //         const {data}=await axios.get('/api/seller/sellerAuth');
+    //         if(data.success){
+    //             setIsSeller(true)
+    //         }else{
+    //             setIsSeller(false)
+    //         }
+    //     } catch (error) {
+    //         setIsSeller(false)
+    //     }
+    // }
+
+    const fetchSeller = async () => {
+        try {
+            const { data } = await axios.get('/api/seller/sellerAuth', {
+                withCredentials: true // ✅ This tells browser to send cookies
+            });
+            setIsSeller(data.success);
+        } catch (error) {
+            setIsSeller(false);
+        }
+    };
+    
+
     const fetchProducts=async()=>{
         setProducts(dummyProducts)
     }
 
     useEffect(()=>{
+        fetchSeller()
         fetchProducts()
         console.log(dummyProducts)
     },[])
