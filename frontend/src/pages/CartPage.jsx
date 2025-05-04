@@ -35,22 +35,43 @@ const CartPage = () => {
         setCartArray(temp)
     }
 
-    const getUserAddress=async()=>{
+    // const getUserAddress=async()=>{
+    //     try {
+    //         const {data}=await axios.get('/api/address/get');
+    //         if(data.success){
+    //            setAddresses(data.addresses)
+    //            if(data.addresses.length>0){
+    //             setSelectAddress(data.addresses[0])
+    //            }
+    //         }else{
+    //             toast.error(data.message)
+    //         }
+    //     } catch (error) {
+    //         console.log(error)
+    //         toast.error(error.message)
+    //     }
+    // }
+
+    const getUserAddress = async () => {
         try {
-            const {data}=await axios.get('/api/address/get');
-            if(data.success){
-               setAddresses(data.addresses)
-               if(data.addresses.length>0){
-                setSelectAddress(data.addresses[0])
-               }
-            }else{
-                toast.error(data.message)
+            const { data } = await axios.get('/api/address/get', {
+                withCredentials: true // 👈 this sends cookies with the request
+            });
+    
+            if (data.success) {
+                setAddresses(data.addresses);
+                if (data.addresses.length > 0) {
+                    setSelectAddress(data.addresses[0]);
+                }
+            } else {
+                toast.error(data.message);
             }
         } catch (error) {
-            console.log(error)
-            toast.error(error.message)
+            console.log(error);
+            toast.error(error.message);
         }
-    }
+    };
+    
 
     const placeOrder =async()=>{
         
