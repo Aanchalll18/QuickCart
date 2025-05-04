@@ -28,7 +28,7 @@ app.use(cors({origin: allowedOrigins,credentials:true}))
 app.get('/',(req,res)=>res.send("API WORKING"));
 app.use('/api/user',userRouter)
 app.use('/api/seller',sellerRouter)
-app.use('api/product',productRouter)
+app.use('/api/product',productRouter)
 app.use('/api/cart',cartRoute);
 app.use('/api/address',addressRoute);
 app.use('/api/orders',orderRouter)

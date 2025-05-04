@@ -17,7 +17,7 @@ const AddProduct = () => {
 
 			const productData={
 				name,
-				description:description.spilt('/n'),
+				description:description.split('/n'),
 				category,
 				price,
 				offerPrice
@@ -28,7 +28,7 @@ const AddProduct = () => {
 			for(let i=0;i<files.length;i++){
 				formData.append('images',files[i])
 			}
-			const {data}=await axios.post('/api/product/add',formData)
+			const {data}=await axios.post('/api/product/add-product',formData)
 
 			if(data.success){
 				toast.success(data.message);
@@ -43,7 +43,7 @@ const AddProduct = () => {
 			}
 		} catch (error) {
 			console.log(error);
-			toast.error(data.message)
+			toast.error(error.message)
 		}
 	};
 
