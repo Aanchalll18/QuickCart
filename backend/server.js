@@ -8,6 +8,7 @@ import sellerRouter from './routes/adminRoute.js';
 import connectcloudinary from './config/cloudniary.js';
 import productRouter from './routes/productRoute.js';
 import cartRoute from './routes/cartRouter.js';
+import addressRoute from './routes/addressRoute.js';
 
 const app=express();
 const port =process.env.PORT || 4000;
@@ -27,7 +28,8 @@ app.get('/',(req,res)=>res.send("API WORKING"));
 app.use('/api/user',userRouter)
 app.use('/api/seller',sellerRouter)
 app.use('api/product',productRouter)
-app.use('/api/cart',cartRoute)
+app.use('/api/cart',cartRoute);
+app.use('/api/address',addressRoute)
 
 app.listen(port,()=>{
     console.log(`server running at port ${port}`)
