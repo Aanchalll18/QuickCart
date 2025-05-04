@@ -9,6 +9,7 @@ import connectcloudinary from './config/cloudniary.js';
 import productRouter from './routes/productRoute.js';
 import cartRoute from './routes/cartRouter.js';
 import addressRoute from './routes/addressRoute.js';
+import orderRouter from './routes/orderRoute.js';
 
 const app=express();
 const port =process.env.PORT || 4000;
@@ -29,7 +30,8 @@ app.use('/api/user',userRouter)
 app.use('/api/seller',sellerRouter)
 app.use('api/product',productRouter)
 app.use('/api/cart',cartRoute);
-app.use('/api/address',addressRoute)
+app.use('/api/address',addressRoute);
+app.use('/api/orders',orderRouter)
 
 app.listen(port,()=>{
     console.log(`server running at port ${port}`)
