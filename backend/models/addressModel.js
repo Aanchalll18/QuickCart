@@ -4,4 +4,6 @@ const addressSchema=mongoose.Schema({
 
 })
 
-export default addressSchema;
+const Address=mongoose.models.address || mongoose.model('address',addressSchema)
+
+export default Address;
