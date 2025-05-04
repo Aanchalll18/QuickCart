@@ -5,9 +5,7 @@ const Orders = () => {
 	const [orders, setOrders] = useState([]);
 
 	const fetchOrders = async () => {
-		// Simulate API delay if needed
-		// await new Promise((res) => setTimeout(res, 500));
-		setOrders(dummyOrders);
+		
 	};
 
 	useEffect(() => {

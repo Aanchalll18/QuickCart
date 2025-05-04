@@ -146,7 +146,7 @@ export const AppContextProvider=({children})=>{
         setProducts,products,
         curreny,addToCart,
         updateCart,deleteCart,
-        cartItem,
+        cartItem,setCartItem,
         searchQuery,setSearchQuery,
         getCartAmount,getCartCount,
         axios,fetchProducts,

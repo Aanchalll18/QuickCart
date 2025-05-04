@@ -75,6 +75,8 @@ const CartPage = () => {
 
 				if (data.success) {
 					toast.success("Order placed successfully!");
+                    setCartItem({})
+                    navigate('/my-orders')
 					
 				} else {
 					toast.error(data.message);
