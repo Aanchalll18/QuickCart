@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useAppContext } from "../context/AppContext"
 import { assets, dummyAddress } from "../assets/assets"
+import {toast} from 'react-hot-toast'
 
 const CartPage = () => {
     const {
@@ -12,7 +13,8 @@ const CartPage = () => {
         deleteCart,
         cartItem,
         getCartAmount,
-        getCartCount
+        getCartCount,
+        user,axios
     } = useAppContext()
 
     const [cartArray, setCartArray] = useState([])
@@ -59,6 +61,12 @@ const CartPage = () => {
             getCart()
         }
     }, [products, cartItem])
+
+    useEffect(()=>{
+        if(user){
+            getUserAddress()
+        }
+    },[user])
 
     return products.length > 0 && cartItem ? (
         <div className="flex flex-col md:flex-row mt-16">
