@@ -4,6 +4,6 @@ import authUser from '../middlewares/authuser.js';
 
 const addressRoute=express.Router();
 addressRoute.post('/add-address',authUser,addAddress);
-addressRoute.get('/address',authUser,getAdress)
+addressRoute.get('/get',authUser,getAdress)
 
 export default addressRoute
