@@ -81,7 +81,23 @@ const CartPage = () => {
 				} else {
 					toast.error(data.message);
 				}
-			}
+			}else{
+                const { data } = await axios.post("/api/orders/stripe", {
+					userId: user._id,
+					items: cartArray.map((item) => ({
+						product: item._id,
+						quantity: item.quantity,
+					})),
+					address: selectAddress._id 
+				});
+
+				if (data.success) {
+					window.location.replace(data.url)
+					
+				} else {
+					toast.error(data.message);
+				}
+            }
 		} catch (error) {
 			console.error(error);
 			toast.error("Something went wrong while placing the order.");
