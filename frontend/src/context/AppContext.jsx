@@ -11,8 +11,6 @@ axios.defaults.baseURL=import.meta.env.VITE_BACKEND_URL;
 export const AppContext=createContext();
 
 export const AppContextProvider=({children})=>{
-
-
     const curreny=import.meta.VITE_CURRENCY;
 
     const navigate=useNavigate();
@@ -71,6 +69,39 @@ export const AppContextProvider=({children})=>{
         fetchProducts()
         // console.log(dummyProducts)
     },[])
+    
+    // useEffect(()=>{
+    //     const updateCart=async()=>{
+    //         try {
+    //             const {data}=await axios.post('/api/cart/update',{cartItem})
+    //             if(data.success){
+    //                 toast.error(data.message)
+    //             }
+    //         } catch (error) {
+    //             toast.error(error.message)
+    //         }
+    //     }
+    //     if(user){
+    //         updateCart()
+    //     }
+    // },[cartItem])
+
+    useEffect(() => {
+        const updateCart = async () => {
+            try {
+                const { data } = await axios.post('/api/cart/update', { cartItem });
+                if (data.success) {
+                    toast.error(data.message); // ❌ This line is confusing (why toast.error on success?)
+                }
+            } catch (error) {
+                toast.error(error.message);
+            }
+        };
+    
+        if (user) {
+            updateCart();
+        }
+    }, [cartItem]);
     
 
     const addToCart=(itemId)=>{
