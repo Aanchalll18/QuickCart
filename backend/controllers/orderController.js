@@ -38,3 +38,19 @@ export const placeOrderCOD=async(req,res)=>{
     }
 };
 
+export const getUserOrders=async(req,res)=>{
+    try {
+        const {userId}=req.body;
+        const orders=await Order.find({
+            userId,
+            $or:[{paymentType:"COD"},{isPaid:true}]
+        }).populate("item.product address").sort({createdAt: -1});
+        res.json({success:true,orders})
+    } catch (error) {
+        console.log(error);
+        res.json({
+            success:false,
+            message:'failed to fetch orders'
+        })
+    }
+};
