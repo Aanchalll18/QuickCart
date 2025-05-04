@@ -30,7 +30,7 @@ const orderSchema = new mongoose.Schema({
     {
       product: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'product', // referencing the correct Product model
+        ref: 'product', 
         required: true,
       },
       quantity: {
