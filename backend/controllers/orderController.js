@@ -24,6 +24,10 @@ export const placeOrderCOD=async(req,res)=>{
             address,
             paymentType:"COD"
         })
+        res.json({
+            success:true,
+            message:'Order Placed successfully!'
+        })
 
     } catch (error) {
        console.log(error)
