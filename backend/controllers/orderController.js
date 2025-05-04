@@ -1,4 +1,5 @@
-import Product from "../models/ProductModel";
+import Order from "../models/ordersModel.js";
+import Product from "../models/ProductModel.js";
 
 export const placeOrderCOD=async(req,res)=>{
     try {
@@ -15,6 +16,14 @@ export const placeOrderCOD=async(req,res)=>{
         },0)
 
         amount+=Math.floor(amount*0.02)
+
+        await Order.ceate({
+            userId,
+            items,
+            amount,
+            address,
+            paymentType:"COD"
+        })
 
     } catch (error) {
        console.log(error)
