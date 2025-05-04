@@ -17,7 +17,7 @@ const port =process.env.PORT || 4000;
 await connectDb()
 await connectcloudinary()
 
-const allowedOrigins=['http://localhost:5173']
+const allowedOrigins=['http://localhost:5174']
 
 
 

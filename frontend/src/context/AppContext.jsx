@@ -20,12 +20,13 @@ export const AppContextProvider=({children})=>{
     const [products,setProducts]=useState([])
     const [cartItem,setCartItem]=useState({})
     const [searchQuery,setSearchQuery]=useState({})
+    
 
 
     const fetchSeller = async () => {
         try {
             const { data } = await axios.get('/api/seller/sellerAuth', {
-                withCredentials: true // ✅ This tells browser to send cookies
+                withCredentials: true
             });
             setIsSeller(data.success);
         } catch (error) {
@@ -70,28 +71,13 @@ export const AppContextProvider=({children})=>{
         // console.log(dummyProducts)
     },[])
     
-    // useEffect(()=>{
-    //     const updateCart=async()=>{
-    //         try {
-    //             const {data}=await axios.post('/api/cart/update',{cartItem})
-    //             if(data.success){
-    //                 toast.error(data.message)
-    //             }
-    //         } catch (error) {
-    //             toast.error(error.message)
-    //         }
-    //     }
-    //     if(user){
-    //         updateCart()
-    //     }
-    // },[cartItem])
 
     useEffect(() => {
         const updateCart = async () => {
             try {
                 const { data } = await axios.post('/api/cart/update', { cartItem });
                 if (data.success) {
-                    toast.error(data.message); // ❌ This line is confusing (why toast.error on success?)
+                    toast.success(data.message); 
                 }
             } catch (error) {
                 toast.error(error.message);

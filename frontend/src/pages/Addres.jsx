@@ -32,8 +32,13 @@ const Addres = () => {
   };
 
   const onSubmithandler = async (e) => {
-    e.preventDefault();
-    console.log(address);
+   try {
+    e.preventDefault()
+    const {data}=await axios.post('/api/address/add-address');
+    
+   } catch (error) {
+    
+   }
   };
 
   return (
