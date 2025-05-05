@@ -154,3 +154,20 @@ export const getAllOrders = async (req, res) => {
     });
   }
 };
+
+
+export const stripewebhooks=async(req,res)=>{
+  const stripeInstance=new stripewebhooks(process.env.STRIPE_SECRET_KEY);
+
+  const sig=req.headers["stripe-signature"];
+  let event;
+  try {
+    event=stripeInstance.stripewebhooks.constructEvent(
+      req.body,
+      sig,
+      process.env.STRIPE_SECRET_KEY
+    );
+  } catch (error) {
+    res.status(400).send(`webhook Error:${error.message}`)
+  }
+}
