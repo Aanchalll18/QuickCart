@@ -1,6 +1,8 @@
+import { response } from "express";
 import Order from "../models/ordersModel.js";
 import Product from "../models/ProductModel.js";
 import Stripe from "stripe";
+import User from '../models/UserSchema.js'
 
 const stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -170,4 +172,34 @@ export const stripewebhooks=async(req,res)=>{
   } catch (error) {
     res.status(400).send(`webhook Error:${error.message}`)
   }
+  switch(event.type){
+    case "payment_intent.succeeded":{
+      const paymentInternet=event.data.object;
+      const paymentIntentId=paymentInternet.id;
+
+      const session=await stripeInstance.checkout.session.list({
+        payment_intent:paymentIntentId,
+      });
+      const {orderId,userId}=session.data[0].metadata;
+      await Order.findByIdAndUpdate(orderId,{isPaid:true})
+
+      await User.findByIdAndUpdate(userId,{cartItem:{}})
+      break;
+    }
+    case "payment_intent.payment_failed":{
+      const paymentInternet=event.data.object;
+      const paymentIntentId=paymentInternet.id;
+
+      const session=await stripeInstance.checkout.sessions.list({
+        payment_intent:paymentIntentId,
+      });
+      const {orderId}=session.data[0].metadata;
+      await Order.findByIdAndDelete(orderId);
+      break
+    }
+    default:
+      console.error(`Unhandled event type ${event.type}`)
+      break;
+  }
+  response.json({received:true})
 }
