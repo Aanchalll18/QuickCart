@@ -38,7 +38,7 @@ import jwt from 'jsonwebtoken';
 
 const authSeller = async (req, res, next) => {
   const sellerTtoken = req.cookies.sellerToken;
-  console.log("d-->",token)
+  console.log("d-->",sellerTtoken)
 
   if (!sellerTtoken) {
     return res.status(401).json({
