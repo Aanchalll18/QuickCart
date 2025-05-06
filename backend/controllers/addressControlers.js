@@ -18,21 +18,51 @@ export const addAddress=async(req,res)=>{
     }
 };
 
-export const getAdress=async(req,res)=>{
+// export const getAdress=async(req,res)=>{
+//     try {
+//         // const userId=req;
+//         // console.log(userId)
+//         const userId = req.userId;
+
+//         const addresses = await Address.find({ userId: req.userId });
+
+//         res.json({
+//             success:true,
+//             addresses
+//         })
+//     } catch (error) {
+//        console.log(error);
+//        res.json({
+//         message:error.message
+//        }) 
+//     }
+// };
+
+export const getAdress = async (req, res) => {
     try {
-        const {userId}=req;
-        // console.log(userId)
+        const { userId } = req; // userId should be coming from the authentication middleware
 
-        const addresses = await Address.find({ userId: req.userId });
+        // Ensure userId is available
+        if (!userId) {
+            return res.status(400).json({
+                success: false,
+                message: "User ID is missing",
+            });
+        }
 
+        // Fetch the addresses associated with the userId
+        const addresses = await Address.find({ userId });
+
+        // Return the response with the addresses
         res.json({
-            success:true,
-            addresses
-        })
+            success: true,
+            addresses,
+        });
     } catch (error) {
-       console.log(error);
-       res.json({
-        message:error.message
-       }) 
+        console.log(error);
+        res.status(500).json({
+            success: false,
+            message: "Something went wrong while fetching addresses.",
+        });
     }
 };
