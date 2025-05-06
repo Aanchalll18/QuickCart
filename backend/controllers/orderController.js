@@ -9,12 +9,12 @@ const stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export const placeOrderCOD = async (req, res) => {
   try {
-    const userId = req.userId;
-    const { items, address } = req.body;
+    // const userId = req.userId;
+    const {userId, items, address } = req.body;
     if (!userId || !items || !address) {
       return res.json({
         success: false,
-        message: "All fields are required",
+        message: "All field required",
       });
     }
 
