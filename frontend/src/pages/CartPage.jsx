@@ -21,7 +21,7 @@ const CartPage = () => {
 
 	const [cartArray, setCartArray] = useState([]);
 	const [addresses, setAddresses] = useState();
-	const [showAddress, setShowAddress] = useState(false);
+	const [showAddress, setShowAddress] = useState();
 	const [selectAddress, setSelectAddress] = useState(null);
 	const [paymentOption, setPaymentOption] = useState("COD");
 

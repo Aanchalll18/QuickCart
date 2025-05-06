@@ -40,7 +40,7 @@ export const addAddress=async(req,res)=>{
 
 export const getAdress = async (req, res) => {
     try {
-        const { userId } = req; // userId should be coming from the authentication middleware
+        const { userId } = req;  //userId should be coming from the authentication middleware
 
         // Ensure userId is available
         if (!userId) {
