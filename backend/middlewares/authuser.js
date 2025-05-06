@@ -3,7 +3,7 @@ const authUser=async(req,res,next)=>{
     // const {token}=req.cookies;
     let token = req.cookies.token;
 
-    console.log("auth",token)
+    // console.log("auth",token)
     if(!token){
         return res.json({
             success:false,

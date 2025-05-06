@@ -48,7 +48,6 @@ export const sellerLogin = async (req, res) => {
   }
 };
 
-
 // CHECK SELLER AUTH
 export const isSellerAuth = async (req, res) => {
   try {

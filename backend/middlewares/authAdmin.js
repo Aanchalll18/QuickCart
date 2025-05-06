@@ -1,10 +1,46 @@
+// import jwt from 'jsonwebtoken';
+
+// const authSeller = async (req, res, next) => {
+//   const  sellerToken  = req.cookies.sellerToken;
+//   console.log('Seller Auth Middleware Token:', sellerToken);
+
+//   if (!sellerToken) {
+//     return res.status(401).json({
+//       success: false,
+//       message: 'Not Authorized: No token provided',
+//     });
+//   }
+
+//   try {
+//     // Verify the actual token value
+//     const decoded = jwt.verify(sellerToken, process.env.JWT_SECRET);
+    
+//     if (decoded.email === process.env.SELLER_EMAIL) {
+//       req.email = decoded.email; 
+//       next();
+//     } else {
+//       return res.status(403).json({
+//         success: false,
+//         message: 'Invalid Seller Credentials',
+//       });
+//     }
+//   } catch (error) {
+//     console.error('JWT Error:', error.message);
+//     return res.status(401).json({
+//       success: false,
+//       message: 'Invalid or Expired Token',
+//     });
+//   }
+// };
+
+// export default authSeller;
 import jwt from 'jsonwebtoken';
 
 const authSeller = async (req, res, next) => {
-  const  sellerToken  = req.cookies.sellerToken;
-  console.log('Seller Auth Middleware Token:', sellerToken);
+  const token = req.cookies.sellerToken;
+  console.log("d-->",token)
 
-  if (!sellerToken) {
+  if (!token) {
     return res.status(401).json({
       success: false,
       message: 'Not Authorized: No token provided',
@@ -12,11 +48,11 @@ const authSeller = async (req, res, next) => {
   }
 
   try {
-    // Verify the actual token value
-    const decoded = jwt.verify(sellerToken, process.env.JWT_SECRET);
-    
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    console.log('Decoded token:', decoded); // 🔍 See what's inside
+
     if (decoded.email === process.env.SELLER_EMAIL) {
-      req.user = decoded; 
+      req.email = decoded.email;
       next();
     } else {
       return res.status(403).json({
@@ -25,7 +61,6 @@ const authSeller = async (req, res, next) => {
       });
     }
   } catch (error) {
-    console.error('JWT Error:', error.message);
     return res.status(401).json({
       success: false,
       message: 'Invalid or Expired Token',
