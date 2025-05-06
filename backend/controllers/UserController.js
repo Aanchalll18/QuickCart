@@ -41,13 +41,6 @@ export const register = async (req, res) => {
 			expiresIn: "7d",
 		});
 
-		// Set token in a cookie
-		// res.cookie("token", token, {
-		// 	httpOnly: true,
-		// 	secure: process.env.NODE_ENV === "production",
-		// 	sameSite: process.env.NODE_ENV === "production" ? "None" : "Strict",
-		// 	maxAge: 7 * 24 * 60 * 60 * 1000,
-		// });
     res.cookie("token", token, {
       httpOnly: true,
       secure: true, 
@@ -101,23 +94,13 @@ export const login = async (req, res) => {
     console.log("login",token)
 
 		// // Set token in a cookie
-		// res.cookie("token", token, {
-		// 	httpOnly: true,
-		// 	secure: process.env.NODE_ENV === "production",
-		// 	sameSite: process.env.NODE_ENV === "production" ? "None" : "Strict",
-		// 	maxAge: 7 * 24 * 60 * 60 * 1000,
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true, 
-      sameSite: "None", 
-      maxAge: 7 * 24 * 60 * 60 * 1000,
+		res.cookie("token", token, {
+			httpOnly: true,
+			secure: process.env.NODE_ENV === "production",
+			sameSite: process.env.NODE_ENV === "production" ? "None" : "Strict",
+			maxAge: 7 * 24 * 60 * 60 * 1000,
 		});
-  //   res.cookie("token", token, {
-  //     httpOnly: true,
-  //     secure: process.env.NODE_ENV === "production", // Only set secure cookies in production
-  //     samesite: "lax", // Required for cross-site requests
-  //     maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week expiration
-  // });
+  
   
 
 		return res.status(200).json({
