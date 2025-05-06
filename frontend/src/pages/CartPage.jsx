@@ -227,12 +227,22 @@ const CartPage = () => {
 								? `${selectAddress.street}, ${selectAddress.city}, ${selectAddress.state}, ${selectAddress.country}`
 								: "No address found"}
 						</p>
-						<button
+						{/* <button
 							onClick={() => setShowAddress(!showAddress)}
 							className="text-primary hover:underline cursor-pointer"
 						>
 							Change
-						</button>
+						</button> */}
+						<button
+    onClick={(e) => {
+        e.preventDefault(); // Prevent default behavior, just in case it's inside a <Link>
+        setShowAddress(!showAddress); // Toggle address visibility
+    }}
+    className="text-primary hover:underline cursor-pointer"
+>
+    Change
+</button>
+
 						{showAddress && (
 							<div className="absolute top-12 py-1 bg-white border border-gray-300 text-sm w-full z-10">
 								{addresses.map((addr, idx) => (
