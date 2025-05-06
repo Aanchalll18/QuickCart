@@ -24,11 +24,11 @@ export const sellerLogin = async (req, res) => {
       });
     }
 
-    const token = jwt.sign({ email }, process.env.JWT_SECRET, {
+    const sellerTtoken = jwt.sign({ email }, process.env.JWT_SECRET, {
       expiresIn: '7d',
     });
 
-    res.cookie('sellerToken', sellertoken, {
+    res.cookie('sellerToken', sellerTtoken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Strict',
