@@ -14,11 +14,9 @@ const authSeller = async (req, res, next) => {
   try {
     // Verify the actual token value
     const decoded = jwt.verify(sellerToken, process.env.JWT_SECRET);
-    // console.log('Decoded seller token:', decoded);
-
-    // Check if decoded email matches the seller's email from .env
+    
     if (decoded.email === process.env.SELLER_EMAIL) {
-      req.user = decoded; // Optional: attach decoded info to request
+      req.user = decoded; 
       next();
     } else {
       return res.status(403).json({

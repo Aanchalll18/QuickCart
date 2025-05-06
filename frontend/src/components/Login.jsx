@@ -16,6 +16,7 @@ const Login = () => {
                 name,email,password
             },{withCredentials: true});
             if(data.success){
+                axios.defaults.headers['Authorization'] = `Bearer ${data.token}`;
                 navigate('/')
                 setUser(data.user)
                 setShowUserLogin(false)
