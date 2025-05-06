@@ -2,7 +2,7 @@ import User from "../models/UserSchema.js";
 
 export const updateCart=async(req,res)=>{
     try {
-        const userId = req.userId;
+        const {userId} = req.body;
         const {cartItem}=req.body
         await User.findByIdAndUpdate(userId,{cartItem})
         return res.json({
