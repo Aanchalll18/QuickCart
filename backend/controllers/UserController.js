@@ -94,12 +94,19 @@ export const login = async (req, res) => {
 		});
 
 		// Set token in a cookie
-		res.cookie("token", token, {
-			httpOnly: true,
-			secure: process.env.NODE_ENV === "production",
-			samesite: process.env.NODE_ENV === "production" ? "none" : "strict",
-			maxAge: 7 * 24 * 60 * 60 * 1000,
-		});
+		// res.cookie("token", token, {
+		// 	httpOnly: true,
+		// 	secure: process.env.NODE_ENV === "production",
+		// 	samesite: process.env.NODE_ENV === "production" ? "none" : "strict",
+		// 	maxAge: 7 * 24 * 60 * 60 * 1000,
+		// });
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production", // Only set secure cookies in production
+      samesite: "none", // Required for cross-site requests
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week expiration
+  });
+  
 
 		return res.status(200).json({
 			success: true,

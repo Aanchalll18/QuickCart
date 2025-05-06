@@ -33,14 +33,15 @@
 import jwt from 'jsonwebtoken';
 
 const authUser = async (req, res, next) => {
-    // 1. Check if the token is in cookies
+
     let token = req.cookies.token;
 
-    // 2. If no token in cookies, check the Authorization header
+
+    console.log(token)
     if (!token) {
         const authHeader = req.headers['authorization'];
         if (authHeader && authHeader.startsWith('Bearer ')) {
-            token = authHeader.split(' ')[1]; // Extract token from "Bearer <token>"
+            token = authHeader.split(' ')[1]; 
         }
     }
 
@@ -57,7 +58,7 @@ const authUser = async (req, res, next) => {
         const decode = jwt.verify(token, process.env.JWT_SECRET);
 
         if (decode) {
-            // If the token is valid, attach user ID to the request object
+           
             req.userId = decode.id;
         } else {
             return res.json({
@@ -66,10 +67,10 @@ const authUser = async (req, res, next) => {
             });
         }
 
-        // Proceed to the next middleware or route handler
+        
         next();
     } catch (error) {
-        // If verification fails, return error message
+       
         res.json({
             success: false,
             message: error.message
