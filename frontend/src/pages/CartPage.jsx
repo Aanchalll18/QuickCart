@@ -16,7 +16,7 @@ const CartPage = () => {
 		getCartCount,
 		user,
 		axios,
-        setCartItem
+		setCartItem,
 	} = useAppContext();
 
 	const [cartArray, setCartArray] = useState([]);
@@ -40,7 +40,7 @@ const CartPage = () => {
 	const getUserAddress = async () => {
 		try {
 			const { data } = await axios.get("/api/address/get", {
-				withCredentials: true, 
+				withCredentials: true,
 			});
 
 			if (data.success) {
@@ -70,34 +70,32 @@ const CartPage = () => {
 						product: item._id,
 						quantity: item.quantity,
 					})),
-					address: selectAddress._id 
+					address: selectAddress._id,
 				});
 
 				if (data.success) {
 					toast.success("Order placed successfully!");
-                    setCartItem({})
-                    navigate('/my-orders')
-					
+					setCartItem({});
+					navigate("/my-orders");
 				} else {
 					toast.error(data.message);
 				}
-			}else{
-                const { data } = await axios.post("/api/orders/stripe", {
+			} else {
+				const { data } = await axios.post("/api/orders/stripe", {
 					userId: user._id,
 					items: cartArray.map((item) => ({
 						product: item._id,
 						quantity: item.quantity,
 					})),
-					address: selectAddress._id 
+					address: selectAddress._id,
 				});
 
 				if (data.success) {
-					window.location.replace(data.url)
-					
+					window.location.replace(data.url);
 				} else {
 					toast.error(data.message);
 				}
-            }
+			}
 		} catch (error) {
 			console.error(error);
 			toast.error("Something went wrong while placing the order.");
@@ -234,14 +232,14 @@ const CartPage = () => {
 							Change
 						</button> */}
 						<button
-    onClick={(e) => {
-        e.preventDefault(); // Prevent default behavior, just in case it's inside a <Link>
-        setShowAddress(!showAddress); // Toggle address visibility
-    }}
-    className="text-primary hover:underline cursor-pointer"
->
-    Change
-</button>
+							onClick={(e) => {
+								e.preventDefault(); 
+								setShowAddress(!showAddress); 
+							}}
+							className="text-primary hover:underline cursor-pointer"
+						>
+							Change
+						</button>
 
 						{showAddress && (
 							<div className="absolute top-12 py-1 bg-white border border-gray-300 text-sm w-full z-10">

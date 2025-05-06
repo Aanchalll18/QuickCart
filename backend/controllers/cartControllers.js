@@ -2,8 +2,10 @@ import User from "../models/UserSchema.js";
 
 export const updateCart=async(req,res)=>{
     try {
-        const {userId} = req.body;
+        const userId = req.userId;
         const {cartItem}=req.body
+        console.log("userId",userId);
+        console.log("cartItem",cartItem)
         await User.findByIdAndUpdate(userId,{cartItem})
         return res.json({
             success:true,
@@ -15,7 +17,6 @@ export const updateCart=async(req,res)=>{
             success:false,
             message:'failed to update cart'
         })
-        
     }
 }
 

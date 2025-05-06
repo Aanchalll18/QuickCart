@@ -14,7 +14,7 @@ export const AppContextProvider=({children})=>{
     const curreny=import.meta.VITE_CURRENCY;
 
     const navigate=useNavigate();
-    const [user,setUser]=useState(true);
+    const [user,setUser]=useState(null);
     const [isSeller,setIsSeller]=useState(false)
     const [showUserLogin,setShowUserLogin]=useState(false)
     const [products,setProducts]=useState([])
@@ -72,10 +72,30 @@ export const AppContextProvider=({children})=>{
     },[])
     
 
+    // useEffect(() => {
+    //     const updateCart = async () => {
+    //         try {
+    //             const { data } = await axios.post('/api/cart/update', { cartItem });
+    //             if (data.success) {
+    //                 toast.success(data.message); 
+    //             }
+    //         } catch (error) {
+    //             toast.error(error.message);
+    //         }
+    //     };
+    
+    //     if (user) {
+    //         updateCart();
+    //     }
+    // }, [cartItem]);
+    
     useEffect(() => {
         const updateCart = async () => {
             try {
-                const { data } = await axios.post('/api/cart/update', { cartItem });
+                const { data } = await axios.post('/api/cart/update', {
+                    userId: user._id,
+                    cartItem
+                });
                 if (data.success) {
                     toast.success(data.message); 
                 }
@@ -84,10 +104,10 @@ export const AppContextProvider=({children})=>{
             }
         };
     
-        if (user) {
+        if (user && user._id) {
             updateCart();
         }
-    }, [cartItem]);
+    }, [cartItem,user]);
     
 
     const addToCart=(itemId)=>{

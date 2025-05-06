@@ -24,7 +24,7 @@ export const placeOrderCOD = async (req, res) => {
       amount += product.offerPrice * item.quantity;
     }
 
-    amount += Math.floor(amount * 0.02); // 2% extra charge
+    amount += Math.floor(amount * 0.02); 
 
     await Order.create({
       userId,
@@ -111,11 +111,12 @@ export const placeOrderSTRIPE = async (req, res) => {
         message: "Failed, please try again",
       });
     }
-  };
+};
 
 export const getUserOrders = async (req, res) => {
   try {
     const { userId } = req.query;
+    // console.log(userId)
     if (!userId) {
       return res.json({ success: false, message: "User ID is required" });
     }
