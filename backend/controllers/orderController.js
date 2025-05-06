@@ -157,25 +157,24 @@ export const getAllOrders = async (req, res) => {
   }
 };
 
-
-export const stripewebhooks=async(req,res)=>{
+export const stripewebhooks=async(request,response)=>{
   const stripeInstance=new stripewebhooks(process.env.STRIPE_SECRET_KEY);
 
   const sig=req.headers["stripe-signature"];
   let event;
   try {
-    event=stripeInstance.stripewebhooks.constructEvent(
-      req.body,
+    event=stripeInstance.webhooks.constructEvent(
+      request.body,
       sig,
-      process.env.STRIPE_SECRET_KEY
+      process.env.STRIPE_WEBHOOK_SECRET
     );
   } catch (error) {
-    res.status(400).send(`webhook Error:${error.message}`)
+    response.status(400).send(`webhook Error:${error.message}`)
   }
   switch(event.type){
     case "payment_intent.succeeded":{
-      const paymentInternet=event.data.object;
-      const paymentIntentId=paymentInternet.id;
+      const paymentIntenet=event.data.object;
+      const paymentIntentId=paymentIntenet.id;
 
       const session=await stripeInstance.checkout.session.list({
         payment_intent:paymentIntentId,
@@ -187,8 +186,8 @@ export const stripewebhooks=async(req,res)=>{
       break;
     }
     case "payment_intent.payment_failed":{
-      const paymentInternet=event.data.object;
-      const paymentIntentId=paymentInternet.id;
+      const paymentIntenet=event.data.object;
+      const paymentIntentId=paymentIntenet.id;
 
       const session=await stripeInstance.checkout.sessions.list({
         payment_intent:paymentIntentId,
