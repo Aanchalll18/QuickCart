@@ -42,13 +42,19 @@ export const register = async (req, res) => {
 		});
 
 		// Set token in a cookie
-		res.cookie("token", token, {
-			httpOnly: true,
-			secure: process.env.NODE_ENV === "production",
-			sameSite: process.env.NODE_ENV === "production" ? "None" : "Strict",
-			maxAge: 7 * 24 * 60 * 60 * 1000,
-		});
-
+		// res.cookie("token", token, {
+		// 	httpOnly: true,
+		// 	secure: process.env.NODE_ENV === "production",
+		// 	sameSite: process.env.NODE_ENV === "production" ? "None" : "Strict",
+		// 	maxAge: 7 * 24 * 60 * 60 * 1000,
+		// });
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true, // Always true in production when using HTTPS
+      sameSite: "None", // Required for cross-site cookies
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    });
+    
 		return res.json({
 			success: true,
 			message: "User Registered",
@@ -92,6 +98,7 @@ export const login = async (req, res) => {
 		const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
 			expiresIn: "7d",
 		});
+    console.log("login",token)
 
 		// Set token in a cookie
 		res.cookie("token", token, {
@@ -124,8 +131,9 @@ export const login = async (req, res) => {
 
 export const isAuth = async (req, res) => {
 	try {
-		const userId = req.userId;
-		//   console.log("User ID from token:", userId);
+		// const {userId}=req.body;
+    const userId = req.userId;
+		  console.log("User ID from token:", userId);
 
 		const user = await User.findById(userId).select("-password");
 		return res.json({
