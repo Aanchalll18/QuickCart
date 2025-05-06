@@ -25,7 +25,7 @@ const SellerLayout = () => {
             }
         } catch (error) {
             console.log(error)
-            toast.error(data.error)
+            toast.error(error.message)
         }
     };
 
