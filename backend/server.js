@@ -18,7 +18,7 @@ const port =process.env.PORT || 4000;
 await connectDb()
 await connectcloudinary()
 
-const allowedOrigins=['https://quick-cart-brown-mu.vercel.app/']
+const allowedOrigins=['https://quick-cart-brown-mu.vercel.app/','http://localhost:5173']
 
 app.post('/stripe',express.raw({type:'application/json'}),stripewebhooks)
 
