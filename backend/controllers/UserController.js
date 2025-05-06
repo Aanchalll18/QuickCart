@@ -50,9 +50,9 @@ export const register = async (req, res) => {
 		// });
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true, // Always true in production when using HTTPS
-      sameSite: "None", // Required for cross-site cookies
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      secure: true, 
+      sameSite: "None", 
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
     
 		return res.json({
@@ -100,12 +100,17 @@ export const login = async (req, res) => {
 		});
     console.log("login",token)
 
-		// Set token in a cookie
-		res.cookie("token", token, {
-			httpOnly: true,
-			secure: process.env.NODE_ENV === "production",
-			sameSite: process.env.NODE_ENV === "production" ? "None" : "Strict",
-			maxAge: 7 * 24 * 60 * 60 * 1000,
+		// // Set token in a cookie
+		// res.cookie("token", token, {
+		// 	httpOnly: true,
+		// 	secure: process.env.NODE_ENV === "production",
+		// 	sameSite: process.env.NODE_ENV === "production" ? "None" : "Strict",
+		// 	maxAge: 7 * 24 * 60 * 60 * 1000,
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true, 
+      sameSite: "None", 
+      maxAge: 7 * 24 * 60 * 60 * 1000,
 		});
   //   res.cookie("token", token, {
   //     httpOnly: true,
