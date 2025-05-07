@@ -37,10 +37,10 @@
 import jwt from 'jsonwebtoken';
 
 const authSeller = async (req, res, next) => {
-  const sellerTtoken = req.cookies.sellerToken;
-  console.log("d-->",sellerTtoken)
+  const sellerToken = req.cookies.sellerToken;
+  console.log("d-->",sellerToken)
 
-  if (!sellerTtoken) {
+  if (!sellerToken) {
     return res.status(401).json({
       success: false,
       message: 'Not Authorized: No token provided',
@@ -48,7 +48,7 @@ const authSeller = async (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(sellerTtoken, process.env.JWT_SECRET);
+    const decoded = jwt.verify(sellerToken, process.env.JWT_SECRET);
     console.log('Decoded token:', decoded); // 🔍 See what's inside
 
     if (decoded.email === process.env.SELLER_EMAIL) {
