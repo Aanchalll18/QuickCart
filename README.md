@@ -23,7 +23,7 @@
 - React.js
 - React Router
 - Axios
-- Tailwind CSS / CSS Modules (edit as needed)
+- Tailwind CSS 
 - Vercel (Deployment)
 
 ### Backend:
