@@ -13,8 +13,6 @@
 - 🧺 Add to cart, remove from cart, quantity control
 - 💳 Checkout summary
 - 📱 Fully responsive UI
-- 🧾 Order summary generation
-- 🌙 Dark/light mode (if applicable)
 - 📦 Backend REST API using Node.js & Express
 
 ---
@@ -34,7 +32,7 @@
 - MongoDB (MongoDB Atlas)
 - Mongoose
 - JWT for Authentication
-- Railway / Render (Deployment)
+- vercel (Deployment)
 
 ---
 
